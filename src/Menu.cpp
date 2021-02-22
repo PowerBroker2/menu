@@ -605,7 +605,7 @@ bool Menu::readFile(char filepath[])
 
             while ((n = file.read(buf, sizeof(buf))) > 0)
             {
-                memcpy(fileContents, buf, n);
+                memcpy(fileContents + bytesRead, buf, n);
                 bytesRead += n;
             }
 
