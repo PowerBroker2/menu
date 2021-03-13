@@ -352,23 +352,24 @@ bool Menu::enter(bool _runCallback)
             if (curOption()->isBackOpt())
                 stepOut();
             else
-            {
                 stepIn();
-            }
+
+            if (curNumOptions())
+                return true;
         }
         else
         {
             if (curOption()->isBackOpt())
                 out(false); // callback shouldn't be called twice
-            else
+            else if(curOption()->numOptions()) // only step in if there is an option to step into
             {
                 curMenuPtr = curOption();
                 setSelection(0);
+
+                if (curNumOptions())
+                    return true;
             }
         }
-
-        if (curNumOptions())
-            return true;
     }
 
     return false;
